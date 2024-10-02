@@ -18,6 +18,7 @@ class ChemTalkPage(BasePage):
     def locate_element(self, element_locator):
         element = self.explicitly_wait_and_find_element(MAX_WAIT_INTERVAL, element_locator)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        element.click()
         return element
 
     def wait_for_seconds(self, seconds):
