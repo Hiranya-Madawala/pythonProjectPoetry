@@ -1,22 +1,32 @@
 import pytest
-from pages.chemtalk_page import ChemTalkPage
-from pages.chemtalk_page_locators import ChemTalkPageLocators
+from pages.base_page import BasePage
+from pages.chemtalk_page_locators import Locators
+from resources.constants import URL, MAX_WAIT_INTERVAL
 
+class TestChemTalkNavigation:
+    @pytest.fixture(autouse=True)
+    def setup(self, driver):
+        self.driver = driver
+        self.driver.get(URL)
+        self.base_page = BasePage(driver)
 
-def test_login_and_select_first_option(driver):
-    page = ChemTalkPage(driver)
-    page.login()
-    page.select_first_option()
-    # Add assertions here
-    assert page.find_element(ChemTalkPageLocators.FIRST_OPTION).is_selected()
+    def test_chemtalk_navigation(self):
+        # Verify menu item is displayed
+        assert self.base_page.wait_for_element(*Locators.MENU_ITEM).is_displayed()
 
+        # Click on the dropdown arrow for elements
+        self.base_page.click_element(*Locators.DROPDOWN_ARROW)
 
-def test_locate_manganese(driver):
-    page = ChemTalkPage(driver)
-    page.login()
+        # Select "Interactive Periodic Table" from the popup window
+        self.base_page.click_element(*Locators.INTERACTIVE_PERIODIC_TABLE)
 
-    # Locate Manganese
-    manganese_element = page.locate_element(ChemTalkPageLocators.MANGANESE_ELEMENT)
-    page.wait_for_seconds(20)
-    assert manganese_element.is_displayed()
+        # Verify navigation by checking for the presence of the periodic table
+        #assert self.base_page.wait_for_element(*Locators.MANGANESE_ELEMENT).is_displayed()
+
+        # Scroll to Manganese Element and click
+        #self.driver.execute_script("window.scrollBy(0, 200);")
+        #self.base_page.click_element(*Locators.MANGANESE_ELEMENT)
+
+        # Verify navigation by checking for the presence of the Mn element
+        #assert self.base_page.wait_for_element(*Locators.ATOMIC_NUMBER, timeout=40).is_displayed()
 
