@@ -1,3 +1,2 @@
-MAX_WAIT_INTERVAL = 10
-CHEMTALK_URL = 'https://www.chemtalk.com'
-LOGIN_BTN_TEXT = 'Login'
+URL = "https://chemistrytalk.org/"
+MAX_WAIT_INTERVAL = 20

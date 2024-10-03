@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 
-class ChemTalkPageLocators:
-    LOGIN_LINK = (By.XPATH, '//*[@id="b_results"]/li[1]/h2/a')
-    #FIRST_OPTION = (By.CSS_SELECTOR, '.first-option')
-    FIRST_OPTION = (By.XPATH, "//*[@id='menu-item-7150']/div/a")
-    LOGIN_BUTTON = (By.ID, 'login-button')
-    MANGANESE_ELEMENT = (By.CSS_SELECTOR, '.element-manganese')
+class Locators:
+    MENU_ITEM = (By.XPATH, "//*[@id='menu-item-7150']")
+    DROPDOWN_ARROW = (By.XPATH, "//*[@id='menu-item-7150']/div/a/span/i")
+    INTERACTIVE_PERIODIC_TABLE = (By.XPATH, "//*[@id='menu-item-8003']")
+    MANGANESE_ELEMENT = (By.ID, "e25")
+    ATOMIC_NUMBER = (By.ID, "atomic number-e25")
+
 

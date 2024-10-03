@@ -1,19 +1,16 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# base page
 class BasePage:
-
     def __init__(self, driver):
         self.driver = driver
 
-    def navigate_to(self, url):
-        self.driver.get(url)
+    def wait_for_element(self, by, value, timeout=20):
+        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located((by, value)))
 
-    def explicitly_wait_and_find_element(self, interval, locator_type_and_locator_tuple):
-        return WebDriverWait(self.driver, interval).until(
-            ec.presence_of_element_located(locator_type_and_locator_tuple))
+    def click_element(self, by, value, timeout=20):
+        element = self.wait_for_element(by, value, timeout)
+        element.click()
 
-    def find_element(self, locator_type_and_locator_tuple):
-        return self.driver.find_element(*locator_type_and_locator_tuple)
+
 

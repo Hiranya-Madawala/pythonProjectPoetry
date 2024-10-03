@@ -1,30 +1,27 @@
-from .base_page import BasePage
-from .chemtalk_page import ChemTalkPage
-from .chemtalk_page_locators import ChemTalkPageLocators
+from pages.base_page import BasePage
+from pages.chemtalk_page_locators import Locators
+from resources.constants import URL
 
-# ChemTalk page
 class ChemTalkPage(BasePage):
 
-    def wait_and_click_login_button(self):
-        self.explicitly_wait_and_find_element(MAX_WAIT_INTERVAL, ChemTalkPageLocators.LOGIN_LINK).click()
+    def navigate_to_home(self):
+        self.driver.get(URL)
 
-    def login(self):
-        self.navigate_to(CHEMTALK_URL)
-        self.wait_and_click_login_button()
+    def verify_menu_item_displayed(self):
+        return self.wait_for_element(*Locators.MENU_ITEM).is_displayed()
 
-    def select_first_option(self):
-        self.explicitly_wait_and_find_element(MAX_WAIT_INTERVAL, ChemTalkPageLocators.FIRST_OPTION).click()
+    def click_dropdown_arrow(self):
+        self.click_element(*Locators.DROPDOWN_ARROW)
 
-    def locate_element(self, element_locator):
-        element = self.explicitly_wait_and_find_element(MAX_WAIT_INTERVAL, element_locator)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        element.click()
-        return element
+    def select_interactive_periodic_table(self):
+        self.click_element(*Locators.INTERACTIVE_PERIODIC_TABLE)
 
-    def wait_for_seconds(self, seconds):
-        self.driver.implicitly_wait(seconds)
+    def verify_manganese_element_displayed(self):
+        return self.wait_for_element(*Locators.MANGANESE_ELEMENT).is_displayed()
 
-    def is_logged_out(self):
-        login_btn_text = self.explicitly_wait_and_find_element(MAX_WAIT_INTERVAL, ChemTalkPageLocators.LOGIN_BUTTON).text
-        return login_btn_text == LOGIN_BTN_TEXT
+    #def click_manganese_element(self):
+        #self.click_element(*Locators.MANGANESE_ELEMENT)
+
+    #def verify_atomic_number_displayed(self):
+        #return self.wait_for_element(*Locators.ATOMIC_NUMBER, timeout=40).is_displayed()
 
