@@ -20,8 +20,8 @@ class TestChemTalkNavigation:
         # Select "Interactive Periodic Table" from the popup window
         self.base_page.click_element(*Locators.INTERACTIVE_PERIODIC_TABLE)
 
-        # Verify navigation by checking for the presence of the periodic table
-        #assert self.base_page.wait_for_element(*Locators.MANGANESE_ELEMENT).is_displayed()
+        #Verify navigation by checking for the presence of the periodic table
+        assert self.base_page.wait_for_element(*Locators.MANGANESE_ELEMENT).is_displayed()
 
         # Scroll to Manganese Element and click
         #self.driver.execute_script("window.scrollBy(0, 200);")
